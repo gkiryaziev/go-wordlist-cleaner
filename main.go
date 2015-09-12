@@ -77,7 +77,7 @@ func main() {
 	var new_file string = "Dict_cleaned.dic"
 	var auto bool = false
 	var file_ext = ".dic"
-	var version = "0.2.3"
+	var version = "0.2.4"
 
 	// args
 	for k, arg := range os.Args {

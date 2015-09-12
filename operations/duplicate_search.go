@@ -11,7 +11,7 @@ import (
 // Search duplicates in source file and write uniq to new file
 func DoDuplicate(src_file, new_file string) error {
 
-	m := map[string]bool{}
+	m := map[uint64]bool{}
 	counter := 0
 	percent := 0
 	added := 0
@@ -39,10 +39,11 @@ func DoDuplicate(src_file, new_file string) error {
 
 	for scanner.Scan() {
 		line := scanner.Text()
+		line_hash := s.GetHashFvn64(line)
 
-		if _, seen := m[line]; !seen {
+		if _, seen := m[line_hash]; !seen {
 			fmt.Fprintln(writer, line)
-			m[line] = true
+			m[line_hash] = true
 			added++
 		}
 

@@ -1,4 +1,4 @@
-##	WordList Cleaner v.0.2.3
+##	WordList Cleaner v.0.2.4
 
 Remove non-printable words, trim words length, search duplicates, sorting, words counting.
 
