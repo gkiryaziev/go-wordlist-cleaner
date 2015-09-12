@@ -14,6 +14,8 @@ Sequence of the option keys is not critical.
 
 12.09.2015 - All algorithms has been rewritten to consume less memory. Usage menu and option keys has been changed too.
 
+13.09.2015 - Algorithm for finding duplicates has been optimized.
+
 Examples:
 ```
 wordlistcleaner.exe -min 8 -max 10 -src Source.dic -new New.dic remove trim
