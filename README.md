@@ -1,4 +1,4 @@
-##	WordList Cleaner v.0.2.4
+##	WordList Cleaner v.0.2.6
 
 Remove non-printable words, trim words length, search duplicates, sorting, words counting.
 
@@ -15,6 +15,8 @@ Sequence of the option keys is not critical.
 12.09.2015 - All algorithms has been rewritten to consume less memory. Usage menu and option keys has been changed too.
 
 13.09.2015 - Algorithm for finding duplicates has been optimized.
+
+13.10.2015 - Changed algorithm and view for progress bar. Fixed calculation for strings in files.
 
 Examples:
 ```

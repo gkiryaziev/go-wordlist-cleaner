@@ -3,7 +3,9 @@ package operations
 import (
 	"bufio"
 	"fmt"
+	"github.com/cheggaaa/pb"
 	"os"
+	//"time"
 
 	s "../service"
 )
@@ -12,9 +14,9 @@ import (
 func DoDuplicate(src_file, new_file string) error {
 
 	m := map[uint64]bool{}
-	counter := 0
-	percent := 0
-	added := 0
+
+	var added int64 = 0
+
 	total, err := s.CalculateLines(src_file)
 	if err != nil {
 		return err
@@ -35,7 +37,15 @@ func DoDuplicate(src_file, new_file string) error {
 	scanner := bufio.NewScanner(in)
 	writer := bufio.NewWriter(out)
 
-	fmt.Printf("\n%s processing: ", src_file)
+	// Progress Bar
+	bar := pb.New64(total)
+	bar.ShowPercent = true
+	bar.ShowBar = true
+	bar.ShowCounters = true
+	bar.ShowTimeLeft = true
+	//bar.SetRefreshRate(time.Millisecond * 100)
+	//bar.Format("<.- >")
+	bar.Start()
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -46,24 +56,21 @@ func DoDuplicate(src_file, new_file string) error {
 			m[line_hash] = true
 			added++
 		}
-
-		counter++
-		if counter == 100000 {
-			percent += counter
-			fmt.Printf("..%d%%", (percent * 100 / total))
-			counter = 0
-		}
+		bar.Increment()
 	}
+
+	bar.Finish()
 
 	if err := writer.Flush(); err != nil {
 		return err
 	}
 
-	fmt.Println()
-	fmt.Println("Duplicate search result")
+	fmt.Println("\nResult:", src_file)
+	fmt.Println("-------------------------------------------")
 	fmt.Printf("|%-20s|%20d|\n", "Total", total)
 	fmt.Printf("|%-20s|%20d|\n", "Removed", (total - added))
 	fmt.Printf("|%-20s|%20d|\n", "Result", added)
+	fmt.Println("-------------------------------------------\n")
 
 	return scanner.Err()
 }

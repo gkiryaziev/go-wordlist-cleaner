@@ -77,7 +77,7 @@ func main() {
 	var new_file string = "Dict_cleaned.dic"
 	var auto bool = false
 	var file_ext = ".dic"
-	var version = "0.2.4"
+	var version = "0.2.6"
 
 	// args
 	for k, arg := range os.Args {
@@ -143,6 +143,7 @@ func main() {
 			s.CheckError(err)
 		}
 	} else {
+		fmt.Println()
 		err := DoJob(remove, trim, duplicate, sorting, calculate, min, max, src_file, new_file)
 		s.CheckError(err)
 	}

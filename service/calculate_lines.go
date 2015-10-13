@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func CalculateLines(path string) (int, error) {
+func CalculateLines(path string) (int64, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return 0, err
@@ -14,7 +14,7 @@ func CalculateLines(path string) (int, error) {
 	defer file.Close()
 
 	buf := make([]byte, 8192)
-	count := 0
+	var count int64 = 0
 	lineSep := []byte{'\n'}
 
 	for {
@@ -23,7 +23,7 @@ func CalculateLines(path string) (int, error) {
 			return count, err
 		}
 
-		count += bytes.Count(buf[:c], lineSep)
+		count += int64(bytes.Count(buf[:c], lineSep))
 
 		if err == io.EOF {
 			break

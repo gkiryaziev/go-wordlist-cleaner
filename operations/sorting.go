@@ -16,29 +16,27 @@ func DoSorting(src_file, new_file string) error {
 	}
 
 	// read file
-	fmt.Println("\nReading", src_file)
+	fmt.Println("\nReading...")
 	source, err := s.ReadLine(src_file)
 	if err != nil {
 		return err
 	}
 
 	// sorting
-	fmt.Println("Sorting", new_file)
+	fmt.Println("Sorting...")
 	sort.Strings(source)
-	fmt.Println(new_file, "sorted.")
 
 	// write file
-	fmt.Println("Saving", new_file)
+	fmt.Println("Saving...")
 	err = s.WriteLine(source, new_file)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(new_file, "saved.")
-
-	fmt.Println()
-	fmt.Println("Sorting result")
+	fmt.Println("\nResult:", src_file)
+	fmt.Println("-------------------------------------------")
 	fmt.Printf("|%-20s|%20d|\n", "Total", total)
+	fmt.Println("-------------------------------------------")
 
 	return nil
 }
