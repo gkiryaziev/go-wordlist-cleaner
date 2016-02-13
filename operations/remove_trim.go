@@ -10,7 +10,7 @@ import (
 	s "../service"
 )
 
-func IsPrint(text string) bool {
+func isPrint(text string) bool {
 	for _, r := range text {
 		if r < 32 || r > 126 {
 			return false
@@ -19,7 +19,7 @@ func IsPrint(text string) bool {
 	return true
 }
 
-func IsSize(min, max int, line string) bool {
+func isSize(min, max int, line string) bool {
 	if len([]rune(line)) < min || len([]rune(line)) > max {
 		return false
 	}
@@ -64,21 +64,21 @@ func DoClean(remove, trim bool, min, max int, src_file, new_file string) error {
 		line := scanner.Text()
 
 		if remove && trim {
-			if IsPrint(line) && IsSize(min, max, line) {
+			if isPrint(line) && isSize(min, max, line) {
 				fmt.Fprintln(writer, line)
 				added++
 			}
 		}
 
 		if remove && !trim {
-			if IsPrint(line) {
+			if isPrint(line) {
 				fmt.Fprintln(writer, line)
 				added++
 			}
 		}
 
 		if !remove && trim {
-			if IsSize(min, max, line) {
+			if isSize(min, max, line) {
 				fmt.Fprintln(writer, line)
 				added++
 			}

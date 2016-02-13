@@ -13,7 +13,7 @@ import (
 )
 
 // Do job
-func DoJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_file, new_file string) error {
+func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_file, new_file string) error {
 
 	// Check operations
 	if !remove && !trim && !duplicate && !sorting && !calculate {
@@ -57,7 +57,7 @@ func DoJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_f
 }
 
 // Split file by name and extension
-func SplitFileName(file string) (string, string) {
+func splitFileName(file string) (string, string) {
 	ext := filepath.Ext(file)
 	name := file[0 : len(file)-len(ext)]
 	return name, ext
@@ -137,14 +137,14 @@ func main() {
 		fmt.Println(len(files_list), "files found.")
 		fmt.Println()
 		for _, src_file := range files_list {
-			name, ext := SplitFileName(src_file)
+			name, ext := splitFileName(src_file)
 			new_file := name + "_cleaned" + ext
-			err = DoJob(remove, trim, duplicate, sorting, calculate, min, max, src_file, new_file)
+			err = doJob(remove, trim, duplicate, sorting, calculate, min, max, src_file, new_file)
 			s.CheckError(err)
 		}
 	} else {
 		fmt.Println()
-		err := DoJob(remove, trim, duplicate, sorting, calculate, min, max, src_file, new_file)
+		err := doJob(remove, trim, duplicate, sorting, calculate, min, max, src_file, new_file)
 		s.CheckError(err)
 	}
 
