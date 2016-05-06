@@ -8,11 +8,11 @@ import (
 	"strconv"
 	"time"
 
-	o "./operations"
-	s "./service"
+	o "github.com/gkiryaziev/go-wordlist-cleaner/operations"
+	s "github.com/gkiryaziev/go-wordlist-cleaner/service"
 )
 
-// Do job
+// doJob is main function
 func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_file, new_file string) error {
 
 	// Check operations

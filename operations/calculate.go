@@ -3,10 +3,10 @@ package operations
 import (
 	"fmt"
 
-	s "../service"
+	s "github.com/gkiryaziev/go-wordlist-cleaner/service"
 )
 
-// Calculate lines in source file
+// DoCalculate calculate lines in source file
 func DoCalculate(src_file string) error {
 
 	total, err := s.CalculateLines(src_file)

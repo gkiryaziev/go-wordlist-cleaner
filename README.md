@@ -1,5 +1,10 @@
 ##	WordList Cleaner v.0.2.6
 
+### Install:
+```
+go get github.com/gkiryaziev/go-wordlist-cleaner
+```
+
 Remove non-printable words, trim words length, search duplicates, sorting, words counting.
 
 ![Alt text](/screenshot.jpg?raw=true "Usage")
@@ -18,7 +23,7 @@ Sequence of the option keys is not critical.
 
 13.10.2015 - Changed algorithm and view for progress bar. Fixed calculation for strings in files.
 
-Examples:
+### Examples:
 ```
 wordlistcleaner.exe -min 8 -max 10 -src Source.dic -new New.dic remove trim
 wordlistcleaner.exe -src Source.dic -new New.dic trim

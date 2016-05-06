@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"sort"
 
-	s "../service"
+	s "github.com/gkiryaziev/go-wordlist-cleaner/service"
 )
 
-// Read source file, sort it alphabetically and write to new file
+// DoSorting read source file, sort it alphabetically and write to new file
 func DoSorting(src_file, new_file string) error {
 
 	total, err := s.CalculateLines(src_file)

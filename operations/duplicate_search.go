@@ -3,14 +3,15 @@ package operations
 import (
 	"bufio"
 	"fmt"
-	"github.com/cheggaaa/pb"
 	"os"
 	//"time"
 
-	s "../service"
+	"github.com/cheggaaa/pb"
+
+	s "github.com/gkiryaziev/go-wordlist-cleaner/service"
 )
 
-// Search duplicates in source file and write uniq to new file
+// DoDuplicate search duplicates in source file and write uniq to new file
 func DoDuplicate(src_file, new_file string) error {
 
 	m := map[uint64]bool{}

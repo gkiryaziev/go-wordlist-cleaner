@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// Append lines to file
+// AppendLine append lines to file
 func AppendLine(line, path string) error {
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
@@ -20,7 +20,7 @@ func AppendLine(line, path string) error {
 	return nil
 }
 
-// Read file line by line
+// ReadLine read file line by line
 func ReadLine(path string) ([]string, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -38,7 +38,7 @@ func ReadLine(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
-// Write file line by line
+// WriteLine write file line by line
 func WriteLine(lines []string, path string) error {
 	file, err := os.Create(path)
 	if err != nil {

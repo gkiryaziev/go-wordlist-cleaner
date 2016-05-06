@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-// Main check error
+// CheckError check error
 func CheckError(err error) {
 	if err != nil {
 		Usage()
@@ -16,7 +16,7 @@ func CheckError(err error) {
 	}
 }
 
-// Check is file or directory exist
+// CheckFile check is file or directory exist
 func CheckFile(file string) error {
 	f, err := os.Stat(file)
 	if err == nil {
@@ -29,7 +29,7 @@ func CheckFile(file string) error {
 	return nil
 }
 
-// Check key value
+// CheckArgs check key value
 func CheckArgs(args_length, arg_index int) error {
 	if args_length == (arg_index + 1) {
 		return errors.New("Not specified key value.")

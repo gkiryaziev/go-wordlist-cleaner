@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// CalculateLines return count of lines
 func CalculateLines(path string) (int64, error) {
 	file, err := os.Open(path)
 	if err != nil {

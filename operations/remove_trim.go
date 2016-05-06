@@ -7,9 +7,10 @@ import (
 	"os"
 	//"time"
 
-	s "../service"
+	s "github.com/gkiryaziev/go-wordlist-cleaner/service"
 )
 
+// isPrint check printable characters
 func isPrint(text string) bool {
 	for _, r := range text {
 		if r < 32 || r > 126 {
@@ -19,6 +20,7 @@ func isPrint(text string) bool {
 	return true
 }
 
+// isSize check string size
 func isSize(min, max int, line string) bool {
 	if len([]rune(line)) < min || len([]rune(line)) > max {
 		return false
@@ -26,6 +28,7 @@ func isSize(min, max int, line string) bool {
 	return true
 }
 
+// DoClean clean a string
 func DoClean(remove, trim bool, min, max int, src_file, new_file string) error {
 
 	var added int64 = 0

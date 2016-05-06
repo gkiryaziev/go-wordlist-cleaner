@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-// Search files in directory by extension
+// SearchFilesInDir return list of files in directory by extension
 func SearchFilesInDir(file_ext, path string) ([]string, error) {
 	var files_list []string
 
