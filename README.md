@@ -1,4 +1,4 @@
-##	WordList Cleaner v.0.2.6
+##	WordList Cleaner v0.2.6
 
 ### Install:
 ```
