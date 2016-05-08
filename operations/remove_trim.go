@@ -3,8 +3,9 @@ package operations
 import (
 	"bufio"
 	"fmt"
-	"github.com/cheggaaa/pb"
 	"os"
+
+	"github.com/cheggaaa/pb"
 	//"time"
 
 	s "github.com/gkiryaziev/go-wordlist-cleaner/service"
@@ -29,22 +30,22 @@ func isSize(min, max int, line string) bool {
 }
 
 // DoClean clean a string
-func DoClean(remove, trim bool, min, max int, src_file, new_file string) error {
+func DoClean(remove, trim bool, min, max int, srcFile, newFile string) error {
 
-	var added int64 = 0
+	var added int64
 
-	total, err := s.CalculateLines(src_file)
+	total, err := s.CalculateLines(srcFile)
 	if err != nil {
 		return err
 	}
 
-	in, err := os.Open(src_file)
+	in, err := os.Open(srcFile)
 	if err != nil {
 		return err
 	}
 	defer in.Close()
 
-	out, err := os.Create(new_file)
+	out, err := os.Create(newFile)
 	if err != nil {
 		return err
 	}
@@ -95,12 +96,13 @@ func DoClean(remove, trim bool, min, max int, src_file, new_file string) error {
 		return err
 	}
 
-	fmt.Println("\nResult:", src_file)
+	fmt.Println("\nResult:", srcFile)
 	fmt.Println("-------------------------------------------")
 	fmt.Printf("|%-20s|%20d|\n", "Total", total)
 	fmt.Printf("|%-20s|%20d|\n", "Removed", (total - added))
 	fmt.Printf("|%-20s|%20d|\n", "Result", added)
-	fmt.Println("-------------------------------------------\n")
+	fmt.Println("-------------------------------------------")
+	fmt.Println()
 
 	return scanner.Err()
 }

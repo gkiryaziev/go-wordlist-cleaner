@@ -12,24 +12,24 @@ import (
 )
 
 // DoDuplicate search duplicates in source file and write uniq to new file
-func DoDuplicate(src_file, new_file string) error {
+func DoDuplicate(srcFile, newFile string) error {
 
 	m := map[uint64]bool{}
 
-	var added int64 = 0
+	var added int64
 
-	total, err := s.CalculateLines(src_file)
+	total, err := s.CalculateLines(srcFile)
 	if err != nil {
 		return err
 	}
 
-	in, err := os.Open(src_file)
+	in, err := os.Open(srcFile)
 	if err != nil {
 		return err
 	}
 	defer in.Close()
 
-	out, err := os.Create(new_file)
+	out, err := os.Create(newFile)
 	if err != nil {
 		return err
 	}
@@ -50,11 +50,11 @@ func DoDuplicate(src_file, new_file string) error {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		line_hash := s.GetHashFvn64(line)
+		lineHash := s.GetHashFvn64(line)
 
-		if _, seen := m[line_hash]; !seen {
+		if _, seen := m[lineHash]; !seen {
 			fmt.Fprintln(writer, line)
-			m[line_hash] = true
+			m[lineHash] = true
 			added++
 		}
 		bar.Increment()
@@ -66,12 +66,13 @@ func DoDuplicate(src_file, new_file string) error {
 		return err
 	}
 
-	fmt.Println("\nResult:", src_file)
+	fmt.Println("\nResult:", srcFile)
 	fmt.Println("-------------------------------------------")
 	fmt.Printf("|%-20s|%20d|\n", "Total", total)
 	fmt.Printf("|%-20s|%20d|\n", "Removed", (total - added))
 	fmt.Printf("|%-20s|%20d|\n", "Result", added)
-	fmt.Println("-------------------------------------------\n")
+	fmt.Println("-------------------------------------------")
+	fmt.Println()
 
 	return scanner.Err()
 }

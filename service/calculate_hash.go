@@ -11,7 +11,7 @@ func GetHashFvn(s string) uint32 {
 	return h.Sum32()
 }
 
-// GetHashFvn return uint64 fnv hash
+// GetHashFvn64 return uint64 fnv hash
 func GetHashFvn64(s string) uint64 {
 	h := fnv.New64a()
 	h.Write([]byte(s))

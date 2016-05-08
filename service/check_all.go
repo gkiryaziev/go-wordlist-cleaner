@@ -22,16 +22,15 @@ func CheckFile(file string) error {
 	if err == nil {
 		if f.IsDir() {
 			return errors.New("Directory with name " + file + " is exists.")
-		} else {
-			return errors.New("File with name " + file + " is exists.")
 		}
+		return errors.New("File with name " + file + " is exists.")
 	}
 	return nil
 }
 
 // CheckArgs check key value
-func CheckArgs(args_length, arg_index int) error {
-	if args_length == (arg_index + 1) {
+func CheckArgs(argsLength, argIndex int) error {
+	if argsLength == (argIndex + 1) {
 		return errors.New("Not specified key value.")
 	}
 	return nil

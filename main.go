@@ -13,7 +13,7 @@ import (
 )
 
 // doJob is main function
-func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_file, new_file string) error {
+func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, srcFile, newFile string) error {
 
 	// Check operations
 	if !remove && !trim && !duplicate && !sorting && !calculate {
@@ -22,7 +22,7 @@ func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_f
 
 	// Cleaning
 	if (remove || trim) && (!duplicate && !sorting && !calculate) {
-		if err := o.DoClean(remove, trim, min, max, src_file, new_file); err != nil {
+		if err := o.DoClean(remove, trim, min, max, srcFile, newFile); err != nil {
 			return err
 		}
 		return nil
@@ -30,7 +30,7 @@ func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_f
 
 	//Duplicate search
 	if duplicate && (!remove && !trim && !sorting && !calculate) {
-		if err := o.DoDuplicate(src_file, new_file); err != nil {
+		if err := o.DoDuplicate(srcFile, newFile); err != nil {
 			return err
 		}
 		return nil
@@ -38,7 +38,7 @@ func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_f
 
 	// Sorting
 	if sorting && (!remove && !trim && !duplicate && !calculate) {
-		if err := o.DoSorting(src_file, new_file); err != nil {
+		if err := o.DoSorting(srcFile, newFile); err != nil {
 			return err
 		}
 		return nil
@@ -46,7 +46,7 @@ func doJob(remove, trim, duplicate, sorting, calculate bool, min, max int, src_f
 
 	// calculate
 	if calculate && (!remove && !trim && !duplicate && !sorting) {
-		if err := o.DoCalculate(src_file); err != nil {
+		if err := o.DoCalculate(srcFile); err != nil {
 			return err
 		}
 		return nil
@@ -66,18 +66,18 @@ func splitFileName(file string) (string, string) {
 func main() {
 
 	// variables
-	var remove bool = false
-	var trim bool = false
-	var duplicate bool = false
-	var sorting bool = false
-	var calculate bool = false
-	var min int = 8
-	var max int = 63
-	var src_file string = "Dict.dic"
-	var new_file string = "Dict_cleaned.dic"
-	var auto bool = false
-	var file_ext = ".dic"
-	var version = "0.2.6"
+	remove := false
+	trim := false
+	duplicate := false
+	sorting := false
+	calculate := false
+	min := 8
+	max := 63
+	srcFile := "Dict.dic"
+	newFile := "Dict_cleaned.dic"
+	auto := false
+	fileExt := ".dic"
+	version := "0.2.6"
 
 	// args
 	for k, arg := range os.Args {
@@ -113,17 +113,17 @@ func main() {
 		case "-src":
 			err := s.CheckArgs(len(os.Args), k)
 			s.CheckError(err)
-			src_file = os.Args[k+1]
+			srcFile = os.Args[k+1]
 		case "-new":
 			err := s.CheckArgs(len(os.Args), k)
 			s.CheckError(err)
-			new_file = os.Args[k+1]
+			newFile = os.Args[k+1]
 		case "-a":
 			auto = true
 		case "-ext":
 			err := s.CheckArgs(len(os.Args), k)
 			s.CheckError(err)
-			file_ext = "." + os.Args[k+1]
+			fileExt = "." + os.Args[k+1]
 		}
 	}
 
@@ -131,20 +131,20 @@ func main() {
 	start := time.Now()
 
 	if auto {
-		files_list, err := s.SearchFilesInDir(file_ext, "./")
+		filesList, err := s.SearchFilesInDir(fileExt, "./")
 		s.CheckError(err)
 		fmt.Println()
-		fmt.Println(len(files_list), "files found.")
+		fmt.Println(len(filesList), "files found.")
 		fmt.Println()
-		for _, src_file := range files_list {
-			name, ext := splitFileName(src_file)
-			new_file := name + "_cleaned" + ext
-			err = doJob(remove, trim, duplicate, sorting, calculate, min, max, src_file, new_file)
+		for _, srcFile := range filesList {
+			name, ext := splitFileName(srcFile)
+			newFile := name + "_cleaned" + ext
+			err = doJob(remove, trim, duplicate, sorting, calculate, min, max, srcFile, newFile)
 			s.CheckError(err)
 		}
 	} else {
 		fmt.Println()
-		err := doJob(remove, trim, duplicate, sorting, calculate, min, max, src_file, new_file)
+		err := doJob(remove, trim, duplicate, sorting, calculate, min, max, srcFile, newFile)
 		s.CheckError(err)
 	}
 

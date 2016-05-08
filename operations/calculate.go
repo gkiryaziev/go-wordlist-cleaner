@@ -7,14 +7,14 @@ import (
 )
 
 // DoCalculate calculate lines in source file
-func DoCalculate(src_file string) error {
+func DoCalculate(srcFile string) error {
 
-	total, err := s.CalculateLines(src_file)
+	total, err := s.CalculateLines(srcFile)
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("|%-40s|%20d|\n", src_file, total)
+	fmt.Printf("|%-40s|%20d|\n", srcFile, total)
 
 	return nil
 }

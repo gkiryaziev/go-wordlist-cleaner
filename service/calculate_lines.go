@@ -15,7 +15,7 @@ func CalculateLines(path string) (int64, error) {
 	defer file.Close()
 
 	buf := make([]byte, 8192)
-	var count int64 = 0
+	var count int64
 	lineSep := []byte{'\n'}
 
 	for {
